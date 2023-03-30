@@ -16,8 +16,6 @@ provider "aws" {
   version = "~> 2.36.0"
 }
 
-
- Commented out until after bootstrap
 # Call the seed_module to build our ADO seed info
 module "bootstrap" {
   source                      = "./modules/bootstrap"
