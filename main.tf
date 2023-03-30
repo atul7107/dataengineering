@@ -21,7 +21,7 @@ resource "aws_vpc" "vpc" {
   cidr_block           = "10.1.0.0/16"
   instance_tenancy     = "default"
   tags = {
-    Name      = "Vpc"
+    Name      = "Terraform_VPC"
     Terraform = "true"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_route_table" "route_table1" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name = "RouteTable1"
+    Name = "Terraform_Route_Table"
     Terraform = "true"
   }
 }
@@ -37,7 +37,7 @@ resource "aws_route_table" "route_table1" {
 resource "aws_route_table" "route_table2" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name = "RouteTable2"
+    Name = "Terraform_RouteTable2"
     Terraform = "true"
   }
 }
