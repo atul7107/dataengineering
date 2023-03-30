@@ -35,4 +35,6 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.TF_USER_AWS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_USER_AWS_SECRET }}
-      run: terraform apply -auto-approve -input=false
+      run: | 
+       terraform destroy
+      #terraform apply -auto-approve -input=false
