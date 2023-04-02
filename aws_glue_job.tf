@@ -40,7 +40,7 @@ resource "aws_kms_key" "cloudwatch_log" {
   is_enabled  = true
 }
 
-resource "aws_s3_bucket" "this" {
+resource "aws_s3_bucket_acl" "this" {
   bucket = var.dl_s3_internal_bucket_name
   acl    = var.acl
   }
