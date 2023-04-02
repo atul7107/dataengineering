@@ -70,20 +70,18 @@ resource "aws_iam_role" "glue_jobs" {
 
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
-  name = "s3-encrypt-decrypt-config"
-
-  encryption_configuration {
-    s3_encryption_mode = "SSE-S3"
-  }
-  
-cloudwatch_encryption {
+  name                         = "s3_encrypt_decrypt"
+  encryption_configuration    = {
+    s3_encryption              = {
+      s3_encryption_mode       = "SSE-S3"
+    },
+    cloudwatch_encryption      = {
       cloudwatch_encryption_mode = "SSE-KMS"
- }
-
-  s3_encryption {
-    enable_s3_encryption = true
+      kms_key_id                 = "${aws_kms_key.cloudwatch_log.key_id}"
+    }
   }
 }
+
 
 # Define the input variables for module "dl_s3_internal"
 variable "dl_s3_internal_bucket_name" {
