@@ -2,7 +2,6 @@ resource "aws_glue_job" "raw_to_prepared" {
   
   module "dl_s3_internal" {
   source = "terraform-aws-modules/s3-bucket/aws"
-  name   = "dl-s3-internal"
   tags   = var.tags
   versioning = {
     enabled = true
@@ -46,7 +45,6 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "2.13.0"
-  name   = "dl-s3-internal"
   tags   = var.tags
 
   acl = "private"
