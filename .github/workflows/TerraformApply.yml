@@ -10,7 +10,7 @@ jobs:
 
     - name: Install Terraform
       env:
-        TERRAFORM_VERSION: "0.12.15"
+        TERRAFORM_VERSION: "1.4.4"
       run: |
         rm -f terraform_*.zip
         tf_version=$TERRAFORM_VERSION
