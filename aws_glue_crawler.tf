@@ -29,3 +29,37 @@ resource "aws_glue_crawler" "crawler" {
   }
   EOF
 }
+
+  resource "aws_glue_catalog_database" "data" {
+  for_each = {
+    for zone in var.dl_zones : zone => {
+      name = "${var.dl_catalog_db.name}_${zone}"
+      description = "${var.dl_catalog_db.description} ${upper(zone)} zone"
+    }
+  }
+
+  name        = each.value.name
+  description = each.value.description
+
+  tags = var.tags
+}
+    
+resource "aws_iam_role" "dl_glue_crawler_role" {
+  name = "dl_glue_crawler_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "glue.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = var.tags
+}
+
