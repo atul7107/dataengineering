@@ -10,6 +10,10 @@ dl_s3_raw = {
     id      = "dl-s3-raw-transition"
     enabled = true
 
+ tags = {
+  "Environment" = "dev"
+  # Add any other tags you want to apply
+}
     transition = [
       {
         days          = 30
