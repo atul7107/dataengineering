@@ -78,4 +78,7 @@ variable "dl_s3_prepared_bucket_name" {
   description = "The name of the S3 bucket for storing prepared data"
 }
 
-
+variable "dl_s3_prefixes" {
+  type    = list(string)
+  default = []
+}
