@@ -3,9 +3,6 @@ resource "aws_glue_job" "raw_to_prepared" {
   module "dl_s3_internal" {
   source = "terraform-aws-modules/s3-bucket/aws"
   tags   = var.tags
-  versioning = {
-    enabled = true
-  }
 }  
   for_each = toset(var.dl_s3_prefixes)
   
