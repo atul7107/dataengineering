@@ -40,6 +40,10 @@ resource "aws_kms_key" "cloudwatch_log" {
   is_enabled  = true
 }
 
+resource "aws_s3_bucket" "this" {
+  bucket = var.dl_s3_internal_bucket_name
+  acl    = var.acl
+  }
     
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
@@ -83,11 +87,6 @@ module "dl_s3_internal" {
       }
     }
   ]
-
- resource "aws_s3_bucket" "this" {
-  bucket = var.dl_s3_internal_bucket_name
-  acl    = var.acl
-  }
       
   lifecycle_rule = [
     {
