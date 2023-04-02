@@ -27,4 +27,13 @@ variable "dl_zones" {
   default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
+variable "dl_catalog_db" {
+  description = "Information for the AWS Glue Catalog database"
+  type = object({
+    name        = string
+    description = string
+  })
+}
+
+
 
