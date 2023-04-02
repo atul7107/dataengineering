@@ -27,7 +27,6 @@ variable "dl_glue_job_raw_to_prepared" {
   })
 }
 
-
 # Add any other attributes you need
 
 variable "tags" {
