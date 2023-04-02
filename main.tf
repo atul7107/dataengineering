@@ -16,7 +16,7 @@ provider "aws" {
   version = "~> 2.36.0"
 }
 
-module "s3_bucket" {
+module "dl_s3_raw" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
   block_public_acls       = var.dl_s3_raw.block_public_acls
