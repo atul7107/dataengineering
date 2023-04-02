@@ -2,6 +2,14 @@ module "dl_kms" {
   source = "terraform-aws-modules/kms/aws"
 }
 
+  
+dynamic "server_side_encryption_configuration" {
+  for_each = length(keys(var.server_side_encryption_configuration)) == 0 ? [] : [var.server_side_encryption_configuration]
+  content {
+    # ... existing content ...
+  }
+}
+
 resource "aws_s3_bucket" "this" {
   # ... other configurations ...
 }
