@@ -13,7 +13,7 @@ resource "aws_glue_job" "raw_to_prepared" {
   
   name                   = "${var.dl_glue_job_raw_to_prepared.name}_${each.key}"
   role_arn               = aws_iam_role.glue_jobs.arn
-  security_configuration = aws_glue_security_configuration.s3_encrypt_decrypt.name
+  #security_configuration = aws_glue_security_configuration.s3_encrypt_decrypt.name
   glue_version           = var.dl_glue_job_raw_to_prepared.glue_version
   number_of_workers      = var.dl_glue_job_raw_to_prepared.number_of_workers
   worker_type            = var.dl_glue_job_raw_to_prepared.worker_type
