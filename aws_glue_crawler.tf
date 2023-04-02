@@ -2,22 +2,6 @@ resource "aws_glue_crawler" "crawler" {
 
   for_each = {
       for v in local.zone_prefix_map : "${v.zone}:${v.s3_prefix}" => v
-  locals {
-  zone_prefix_map = [
-    {
-      zone       = "raw"
-      s3_prefix  = var.dl_s3_raw_prefix
-    },
-    {
-      zone       = "prepared"
-      s3_prefix  = var.dl_s3_prepared_prefix
-    },
-    {
-      zone       = "curated"
-      s3_prefix  = var.dl_s3_curated_prefix
-    }
-  ]
-}
   }
 
   database_name = aws_glue_catalog_database.data["${each.value.zone}"].name
