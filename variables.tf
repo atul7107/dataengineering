@@ -82,3 +82,9 @@ variable "dl_s3_prefixes" {
   type    = list(string)
   default = []
 }
+
+module "dl_kms" {
+  source = "terraform-aws-modules/kms/aws"
+
+  name = "dl_kms"
+}
