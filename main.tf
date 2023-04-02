@@ -4,34 +4,6 @@ module "dl_kms" {
 
 
 resource "aws_s3_bucket" "this" {
-  dynamic "lifecycle_configuration" {
-    for_each = length(var.dl_s3_raw.lifecycle_rule) > 0 ? [1] : []
-    content {
-      rule {
-        dynamic "lifecycle_rule" {
-          for_each = var.dl_s3_raw.lifecycle_rule
-          content {
-            id      = lifecycle_rule.value.id
-            status  = lifecycle_rule.value.status
-
-            dynamic "transition" {
-              for_each = lifecycle_rule.value.transition
-              content {
-                days          = transition.value.days
-                storage_class = transition.value.storage_class
-              }
-            }
-
-            dynamic "expiration" {
-              for_each = lifecycle_rule.value.expiration
-              content {
-                days = expiration.value.days
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   server_side_encryption_configuration {
