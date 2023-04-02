@@ -26,7 +26,7 @@ resource "aws_glue_job" "raw_to_prepared" {
   default_arguments = {
     "--job-bookmark-option" : "${var.dl_glue_job_raw_to_prepared.job_bookmark_option}"
     "--TempDir"             : "s3://${module.dl_s3_internal.s3_bucket_id}/${var.dl_glue_job_raw_to_prepared.temp_folder}"
-    "--DestBucket"          : "${module.dl_s3_prepared.s3_bucket_id}"
+   # "--DestBucket"          : "${module.dl_s3_prepared.s3_bucket_id}"
     "--DataCategory"        : "${each.key}"
     "--OriginDB"            : "${var.dl_glue_job_raw_to_prepared.origin_db}"
   }
