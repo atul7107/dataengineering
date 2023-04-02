@@ -81,7 +81,9 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   }
 }
 
-
+module "dl_s3_prepared" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+}
  
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
