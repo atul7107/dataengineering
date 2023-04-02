@@ -3,5 +3,6 @@ variable "dl_s3_raw" {
   type = object({
     bucket_name = string
     create_s3_bucket = bool
+    block_public_acls = bool
   })
 }
