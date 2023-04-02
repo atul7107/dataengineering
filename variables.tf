@@ -16,7 +16,6 @@ variable "dl_s3_raw" {
 variable "dl_glue_job_raw_to_prepared" {
   type = object({
     type            = string
-    default         = "default_value" 
     name            = string
     scripts_folder  = string
     temp_folder     = string
@@ -48,24 +47,6 @@ variable "dl_catalog_db" {
   type = object({
     name        = string
     description = string
-  })
-}
-
-# Define the AWS IAM role resource for Glue jobs
-resource "aws_iam_role" "glue_jobs" {
-  name = "glue-jobs-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "glue.amazonaws.com"
-        }
-      }
-    ]
   })
 }
 
