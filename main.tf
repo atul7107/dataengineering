@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "this" {
       }
     }
   }
-
+}
 # Define the AWS IAM role resource for Glue jobs
 resource "aws_iam_role" "glue_jobs" {
   name = "glue-jobs-role"
