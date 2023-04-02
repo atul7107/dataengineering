@@ -1,5 +1,13 @@
 resource "aws_glue_job" "raw_to_prepared" {
   
+  module "dl_s3_internal" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+  name   = "dl-s3-internal"
+  tags   = var.tags
+  versioning = {
+    enabled = true
+  }
+}  
   for_each = toset(var.dl_s3_prefixes)
   
   name                   = "${var.dl_glue_job_raw_to_prepared.name}_${each.key}"
@@ -35,13 +43,3 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
   kms_key_id = module.dl_kms.kms_arn
 
 }
-    
-module "dl_s3_internal" {
-  source = "terraform-aws-modules/s3-bucket/aws"
-  name   = "dl-s3-internal"
-  tags   = var.tags
-  versioning = {
-    enabled = true
-  }
-}
-
