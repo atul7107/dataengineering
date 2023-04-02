@@ -43,3 +43,6 @@ dl_catalog_db = {
 }
 dl_s3_internal_bucket_name = {
 }
+
+dl_s3_prepared_bucket_name = {
+}
