@@ -63,7 +63,6 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   encryption_configuration {
     s3_encryption {
       s3_encryption_mode = "SSE-S3"
-      kms_master_key_id  = module.dl_kms.kms_key_arn
     }
 
     cloudwatch_encryption {
@@ -76,6 +75,7 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
     }
   }
 }
+
 
  
 module "dl_s3_internal" {
