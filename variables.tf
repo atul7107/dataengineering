@@ -69,6 +69,7 @@ variable "dl_s3_prefixes" {
 
 variable "server_side_encryption_configuration" {
   description = "The server-side encryption configuration for the S3 bucket"
+  for_each = length(var.server_side_encryption_configuration) == 0 ? {} : { index(var.server_side_encryption_configuration, 0) => var.server_side_encryption_configuration[0] }
   type        = map(any)
   default = {
     rule = {
