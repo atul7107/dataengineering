@@ -74,26 +74,15 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   encryption_configuration    = {
     s3_encryption              = {
       s3_encryption_mode       = "SSE-S3"
+      s3_encryption_mode = var.s3_encryption_mode
     },
     cloudwatch_encryption      = {
       cloudwatch_encryption_mode = "SSE-KMS"
       kms_key_id                 = "${aws_kms_key.cloudwatch_log.key_id}"
+      mode                   = var.cloudwatch_encryption_mode
     }
   }
 }
-
-resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
-  name                     = var.name
-  cloudwatch_encryption    = { 
-    mode                   = var.cloudwatch_encryption_mode 
-  }
-  encryption_configuration {
-    s3_encryption = {
-      s3_encryption_mode = var.s3_encryption_mode
-    }
-  }
-}
-
 
 # Define the input variables for module "dl_s3_internal"
 variable "dl_s3_internal_bucket_name" {
