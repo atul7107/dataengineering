@@ -8,26 +8,23 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   rule {
-    dynamic "lifecycle_rule" {
-      for_each = var.dl_s3_raw.lifecycle_rule
+    for_each = var.dl_s3_raw.lifecycle_rule
+
+    id      = each.value.id
+    status  = each.value.enabled ? "Enabled" : "Disabled"
+
+    dynamic "transition" {
+      for_each = each.value.transition
       content {
-        id      = lifecycle_rule.value.id
-        status  = lifecycle_rule.value.enabled ? "Enabled" : "Disabled"
+        days          = transition.value.days
+        storage_class = transition.value.storage_class
+      }
+    }
 
-        dynamic "transition" {
-          for_each = lifecycle_rule.value.transition
-          content {
-            days          = transition.value.days
-            storage_class = transition.value.storage_class
-          }
-        }
-
-        dynamic "expiration" {
-          for_each = lifecycle_rule.value.expiration
-          content {
-            days = expiration.value.days
-          }
-        }
+    dynamic "expiration" {
+      for_each = each.value.expiration
+      content {
+        days = expiration.value.days
       }
     }
   }
