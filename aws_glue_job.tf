@@ -67,7 +67,7 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
 
     cloudwatch_encryption {
       cloudwatch_encryption_mode = "SSE-KMS"
-      kms_key_id                = aws_kms_key.cloudwatch_log.arn
+      kms_key_arn                = aws_kms_key.cloudwatch_log.arn
     }
 
     job_bookmarks_encryption {
