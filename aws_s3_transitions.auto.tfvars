@@ -52,11 +52,5 @@ dl_catalog_db = {
   name        = "dl_glue_raw"
   description = "this is the glue pipeline"
 }
-dl_s3_internal_bucket_name = {
-  name        = "internal
-dl_s3_internal_bucket_name = {
-}
-
-dl_s3_prepared_bucket_name = {
-   name       = "s3_prepared"
-}
+dl_s3_internal_bucket_name = "internal"
+dl_s3_prepared_bucket_name = "s3_prepared"
