@@ -40,8 +40,6 @@ resource "aws_glue_crawler" "crawler" {
 
   name        = each.value.name
   description = each.value.description
-
-  tags = var.tags
 }
     
 resource "aws_iam_role" "dl_glue_crawler_role" {
@@ -60,6 +58,5 @@ resource "aws_iam_role" "dl_glue_crawler_role" {
     ]
   })
 
-  tags = var.tags
 }
 
