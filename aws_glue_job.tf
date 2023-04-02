@@ -15,6 +15,11 @@ resource "aws_glue_job" "raw_to_prepared" {
   }
 }
 
+resource "aws_kms_key" "cloudwatch_log" {
+  description = "KMS key for CloudWatch log encryption"
+  is_enabled  = true
+}
+
   
   module "dl_s3_internal" {
     source = "terraform-aws-modules/s3-bucket/aws"
