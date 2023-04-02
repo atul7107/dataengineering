@@ -6,16 +6,6 @@ module "dl_kms" {
 resource "aws_s3_bucket" "this" {
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = var.server_side_encryption_configuration.rule.apply_server_side_encryption_by_default.sse_algorithm
-      }
-    }
-  }
-}
-
-
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   for_each = { for rule in var.dl_s3_raw.lifecycle_rule : rule.id => rule }
   
