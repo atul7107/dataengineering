@@ -4,8 +4,6 @@ module "dl_kms" {
 
 
 resource "aws_s3_bucket" "this" {
-  # ... other configurations ...
-
   dynamic "lifecycle_configuration" {
     for_each = length(var.dl_s3_raw.lifecycle_rule) > 0 ? [1] : []
     content {
@@ -43,8 +41,6 @@ resource "aws_s3_bucket" "this" {
       }
     }
   }
-
-  # ... other configurations ...
 }
 
 
