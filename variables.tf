@@ -13,6 +13,21 @@ variable "dl_s3_raw" {
   })
 }
 
+variable "dl_glue_job_raw_to_prepared" {
+  type = object({
+    name            = string
+    scripts_folder  = string
+    temp_folder     = string
+    job_bookmark_option = string
+    origin_db       = string
+    glue_version    = string
+    number_of_workers = number
+    worker_type      = string
+    timeout          = number
+  })
+}
+
+
 # Add any other attributes you need
 
 variable "tags" {
