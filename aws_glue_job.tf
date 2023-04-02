@@ -88,7 +88,6 @@ module "dl_s3_internal" {
     {
       id      = "glacier_archive_rule"
       prefix  = "archive/"
-      status  = "Disabled"
       archive = {
         days            = "60"
         glacier_job_tier = "Standard"
