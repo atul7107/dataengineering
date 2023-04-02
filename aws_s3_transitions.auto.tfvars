@@ -37,3 +37,7 @@ tags = {
 dl_glue_job_raw_to_prepared = {
 }
 
+dl_catalog_db = {
+  name        = "dl_glue_raw"
+  description = "this is the glue pipeline"
+}
