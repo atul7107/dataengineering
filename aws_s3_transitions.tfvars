@@ -5,7 +5,7 @@ dl_s3_raw = {
   create_s3_bucket        = true
   force_destroy           = true
   restrict_public_buckets = true
-  versioning              = true
+  versioning             = { "status" = "Enabled" } # Update the versioning value
   lifecycle_rule = [{
     id      = "dl-s3-raw-transition"
     enabled = true
