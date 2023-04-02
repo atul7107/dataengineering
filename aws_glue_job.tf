@@ -50,7 +50,7 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   encryption_configuration    = {
     s3_encryption              = {
       s3_encryption_mode       = "SSE-S3"
-      s3_encryption_mode = var.s3_encryption_mode
+      kms_master_key_id        = module.dl_kms.kms_arn
     }
     cloudwatch_encryption      = {
       cloudwatch_encryption_mode = "SSE-KMS"
@@ -59,6 +59,7 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
     }
   }
 }
+
   
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
