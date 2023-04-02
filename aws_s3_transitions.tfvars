@@ -5,15 +5,11 @@ dl_s3_raw = {
   create_s3_bucket        = true
   force_destroy           = true
   restrict_public_buckets = true
-  versioning             = { "status" = "Enabled" } # Update the versioning value
+  versioning              = { "status" = "Enabled" }
   lifecycle_rule = [{
     id      = "dl-s3-raw-transition"
     enabled = true
 
- tags = {
-  "Environment" = "dev"
-  # Add any other tags you want to apply
-}
     transition = [
       {
         days          = 30
@@ -31,4 +27,9 @@ dl_s3_raw = {
       }
     ]
   }]
+}
+
+tags = {
+  "Environment" = "dev"
+  # Add any other tags you want to apply
 }
