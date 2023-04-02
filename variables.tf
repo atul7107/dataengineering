@@ -20,3 +20,11 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "dl_zones" {
+  description = "A list of availability zones for the deployment"
+  type        = list(string)
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
+
