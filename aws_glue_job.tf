@@ -48,7 +48,6 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   name                         = "s3_encrypt_decrypt"
   encryption_configuration    = {
-    s3_encryption              = {
       s3_encryption_mode       = "SSE-S3"
       kms_master_key_id        = module.dl_kms.kms_arn
     }
