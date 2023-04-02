@@ -16,6 +16,7 @@ variable "dl_s3_raw" {
 variable "dl_glue_job_raw_to_prepared" {
   type = object({
     type            = string
+    default         = "default_value" 
     name            = string
     scripts_folder  = string
     temp_folder     = string
