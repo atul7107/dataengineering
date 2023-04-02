@@ -8,8 +8,17 @@ variable "dl_s3_raw" {
     restrict_public_buckets = bool
     versioning             = map(string) # Update the versioning type
     create_s3_bucket       = bool # Add the create_s3_bucket attribute
-    lifecycle_rule         = list(map(any)) # Add the lifecycle_rule attribute
-    
+    lifecycle_rule          = list(object({
+      id         = string
+      enabled    = bool
+      transition = list(object({
+        days          = number
+        storage_class = string
+      }))
+      expiration = list(object({
+        days = number
+      }))
+    }))
   })
 }
 
