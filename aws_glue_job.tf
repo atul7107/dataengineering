@@ -58,18 +58,25 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
     
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
-  name                         = "s3_encrypt_decrypt"
-  encryption_configuration = {
-    s3_encryption = {
+  name = "s3_encrypt_decrypt"
+
+  encryption_configuration {
+    s3_encryption {
       s3_encryption_mode = "SSE-S3"
-      kms_master_key_id = module.dl_kms.kms_key_arn
+      kms_master_key_id  = module.dl_kms.kms_key_arn
     }
-  }   
-  cloudwatch_encryption = {
-    cloudwatch_encryption_mode = "SSE-KMS"
-    kms_key_id = aws_kms_key.cloudwatch_log.arn
+
+    cloudwatch_encryption {
+      cloudwatch_encryption_mode = "SSE-KMS"
+      kms_key_id                = aws_kms_key.cloudwatch_log.arn
+    }
+
+    job_bookmarks_encryption {
+      job_bookmarks_encryption_mode = "DISABLED"
+    }
   }
 }
+
  
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
