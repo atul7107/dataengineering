@@ -35,5 +35,47 @@ variable "dl_catalog_db" {
   })
 }
 
+# Define the AWS IAM role resource for Glue jobs
+resource "aws_iam_role" "glue_jobs" {
+  name = "glue-jobs-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "glue.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+# Define the AWS Glue security configuration resource for S3 encryption and decryption
+resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
+  name = "s3-encrypt-decrypt-config"
+
+  encryption_configuration {
+    s3_encryption_mode = "SSE-S3"
+  }
+
+  s3_encryption {
+    enable_s3_encryption = true
+  }
+}
+
+# Define the input variables for module "dl_s3_internal"
+variable "dl_s3_internal_bucket_name" {
+  type        = string
+  description = "The name of the S3 bucket for storing raw data"
+}
+
+# Define the input variables for module "dl_s3_prepared"
+variable "dl_s3_prepared_bucket_name" {
+  type        = string
+  description = "The name of the S3 bucket for storing prepared data"
+}
 
 
