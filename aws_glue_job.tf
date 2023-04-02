@@ -14,12 +14,6 @@ resource "aws_glue_job" "raw_to_prepared" {
     Project     = var.project
   }
 }
-
-resource "aws_kms_key" "cloudwatch_log" {
-  description = "KMS key for CloudWatch log encryption"
-  is_enabled  = true
-}
-
   
   module "dl_s3_internal" {
     source = "terraform-aws-modules/s3-bucket/aws"
@@ -60,6 +54,12 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
   kms_key_id = module.dl_kms.key_arn
 
 }
+    
+resource "aws_kms_key" "cloudwatch_log" {
+  description = "KMS key for CloudWatch log encryption"
+  is_enabled  = true
+}
+
     
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
