@@ -29,7 +29,7 @@ module "dl_s3_raw" {
 
   block_public_acls       = var.dl_s3_raw.block_public_acls
   block_public_policy     = var.dl_s3_raw.block_public_policy
-  bucket_name             = var.dl_s3_raw.bucket_name
+  bucket                  = var.dl_s3_raw.bucket_name
   create_s3_bucket        = var.dl_s3_raw.create_s3_bucket
   force_destroy           = var.dl_s3_raw.force_destroy
   kms_master_key_arn      = module.dl_kms.kms_arn
