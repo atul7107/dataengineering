@@ -48,8 +48,6 @@ module "dl_s3_internal" {
 
   force_destroy = true
 
-  versioning_enabled = true
-
   server_side_encryption_configuration = [
     {
       rule = {
