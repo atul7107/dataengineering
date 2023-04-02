@@ -75,6 +75,11 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   encryption_configuration {
     s3_encryption_mode = "SSE-S3"
   }
+  
+cloudwatch_encryption {
+      "cloudwatch_encryption_mode" = "SSE-KMS"
+      "kms_key_arn"                = var.kms_key_arn
+}
 
   s3_encryption {
     enable_s3_encryption = true
