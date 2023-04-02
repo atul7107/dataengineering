@@ -59,8 +59,6 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
   }
 }
  
-module "dl_s3_internal"
-
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "2.13.0"
