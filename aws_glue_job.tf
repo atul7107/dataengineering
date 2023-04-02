@@ -58,7 +58,6 @@ module "dl_s3_internal" {
       rule = {
         apply_server_side_encryption_by_default = {
           sse_algorithm     = "AES256"
-          kms_master_key_id = module.dl_kms.kms_arn
         }
       }
     }
