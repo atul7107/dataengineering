@@ -84,6 +84,11 @@ module "dl_s3_internal" {
     }
   ]
 
+ resource "aws_s3_bucket" "this" {
+  bucket = var.dl_s3_internal_bucket_name
+  acl    = var.acl
+  }
+      
   lifecycle_rule = [
     {
       id      = "glacier_archive_rule"
