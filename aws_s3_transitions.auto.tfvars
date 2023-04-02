@@ -8,7 +8,7 @@ dl_s3_raw = {
   versioning              = { "status" = "Enabled" }
   lifecycle_rule = [{
     id      = "dl-s3-raw-transition"
-    enabled = true
+    enabled = false
 
     transition = [
       {
