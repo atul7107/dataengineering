@@ -57,8 +57,6 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
       mode                   = var.cloudwatch_encryption_mode
     }
   }
-}
-
   
 module "dl_s3_internal" {
   source  = "terraform-aws-modules/s3-bucket/aws"
