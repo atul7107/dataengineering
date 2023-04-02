@@ -70,7 +70,6 @@ variable "dl_s3_prefixes" {
 variable "server_side_encryption_configuration" {
   description = "The server-side encryption configuration for the S3 bucket"
   type        = map(any)
-
   default = {
     rule = {
       apply_server_side_encryption_by_default = {
