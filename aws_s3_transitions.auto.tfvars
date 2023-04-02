@@ -41,3 +41,5 @@ dl_catalog_db = {
   name        = "dl_glue_raw"
   description = "this is the glue pipeline"
 }
+dl_s3_internal_bucket_name = {
+}
