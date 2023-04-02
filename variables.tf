@@ -66,3 +66,16 @@ variable "dl_s3_prefixes" {
   type    = list(string)
   default = []
 }
+
+variable "server_side_encryption_configuration" {
+  description = "The server-side encryption configuration for the S3 bucket"
+  type        = map(any)
+
+  default = {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
