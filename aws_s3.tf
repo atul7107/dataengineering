@@ -11,9 +11,17 @@ terraform {
 }
 
 # Download any stable version in AWS provider of 2.36.0 or higher in 2.36 train
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "4.60.0"
+    }
+  }
+}
+
 provider "aws" {
   region  = "us-east-1"
-  version = "~> 2.36.0"
 }
 
 module "dl_s3_raw" {
