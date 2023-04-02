@@ -82,6 +82,13 @@ variable "dl_s3_prefixes" {
   default = []
 }
 
+variable "acl" {
+  description = "Access control list for S3 bucket"
+  type        = string
+  default     = "private"
+}
+
+
 variable "server_side_encryption_configuration" {
   description = "The server-side encryption configuration for the S3 bucket"
   type        = map(any)
