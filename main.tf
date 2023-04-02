@@ -16,8 +16,8 @@ provider "aws" {
   version = "~> 2.36.0"
 }
 
-module "dl_s3_raw" {
-  source = "./modules/aws-s3-bucket"
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
 
   block_public_acls       = var.dl_s3_raw.block_public_acls
   block_public_policy     = var.dl_s3_raw.block_public_policy
@@ -35,7 +35,7 @@ module "dl_s3_raw" {
   depends_on = [module.dl_kms]
 }
 
-dl_s3_raw = {
+s3_bucket = {
   block_public_acls       = true
   block_public_policy     = true
   bucket_name             = "raw"
