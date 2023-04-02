@@ -36,7 +36,6 @@ resource "aws_glue_job" "raw_to_prepared" {
 resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
   
   for_each = toset(var.dl_s3_prefixes)
-  
   bucket     = module.dl_s3_internal.s3_bucket_id
   key        = "${var.dl_glue_job_raw_to_prepared.scripts_folder}/${var.dl_glue_job_raw_to_prepared.name}.py"
   content    = file("scripts/glue_jobs/${var.dl_glue_job_raw_to_prepared.name}.py")
