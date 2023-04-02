@@ -1,19 +1,5 @@
 resource "aws_glue_job" "raw_to_prepared" {
   
-  module "dl_kms" {
-   source = "terraform-aws-modules/kms/aws"
-   version = "4.1.0"
-   name   = "dl-kms"
-   description = "Module for creating KMS key for data lake"
-   enable_key_rotation = true
-   deletion_window_in_days = 30
-  tags = {
-    
-    Terraform = "true"
-    Environment = var.environment
-    Project     = var.project
-  }
-}
   
   module "dl_s3_internal" {
     source = "terraform-aws-modules/s3-bucket/aws"
@@ -78,6 +64,21 @@ resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
     job_bookmarks_encryption {
       job_bookmarks_encryption_mode = "DISABLED"
     }
+  }
+}
+    
+module "dl_kms" {
+   source = "terraform-aws-modules/kms/aws"
+   version = "4.1.0"
+   name   = "dl-kms"
+   description = "Module for creating KMS key for data lake"
+   enable_key_rotation = true
+   deletion_window_in_days = 30
+  tags = {
+    
+    Terraform = "true"
+    Environment = var.environment
+    Project     = var.project
   }
 }
 
