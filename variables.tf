@@ -7,7 +7,7 @@ variable "dl_s3_raw" {
     force_destroy          = bool
     lifecycle_rule         = any # or a more specific type
     restrict_public_buckets = bool
-    versioning             = bool
+    versioning             = map(string) # Update the versioning type
     create_s3_bucket       = bool # Add the create_s3_bucket attribute
     
   })
