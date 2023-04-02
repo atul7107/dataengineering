@@ -7,9 +7,9 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
+  for_each = { for rule in var.dl_s3_raw.lifecycle_rule : rule.id => rule }
+  
   rule {
-    for_each = var.dl_s3_raw.lifecycle_rule
-
     id      = each.value.id
     status  = each.value.enabled ? "Enabled" : "Disabled"
 
