@@ -96,16 +96,3 @@ module "dl_s3_internal" {
     },
   ]
 }
-
- resource "aws_s3_bucket" "this" {
-  # ...
-  lifecycle_rule {
-    id      = each.value.id
-    prefix  = each.value.prefix
-    status  = each.value.status
-    transition {
-      days          = each.value.transition.days
-      storage_class = each.value.transition.storage_class
-    }
-  }
-}
