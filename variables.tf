@@ -8,6 +8,7 @@ variable "dl_s3_raw" {
     lifecycle_rule = object({
       id                     = string
       prefix                 = string
+      enabled                = bool
       status                 = string
       transitions            = list(object({
         days           = number
@@ -17,9 +18,9 @@ variable "dl_s3_raw" {
         days           = number
         storage_class  = string
       }))
-      expiration             = object({
+      expiration             = list(object({
         days           = number
-      })
+      }))
     }) # or a more specific type
     restrict_public_buckets = bool
     versioning             = map(string) # Update the versioning type
