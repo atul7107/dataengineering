@@ -23,7 +23,9 @@ resource "aws_glue_catalog_table" "dl_glue_catalog_test_table" {
   }
 
   storage_descriptor {
-    location      = "s3://${module.dl_s3_raw.s3_bucket_id}/${each.key}/test_table/"
+    location      = "s3://${element(module.dl_s3_raw, 0).s3_bucket_id}/${each.key}/test_table/"
+    #location      = "s3://${module.dl_s3_raw.s3_bucket_id}/${each.key}/test_table/"
+    #location      = "s3://${module.dl_s3_raw.s3_bucket_id}/${each.key}/test_table/" 
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
 
