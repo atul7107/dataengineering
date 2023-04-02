@@ -7,6 +7,7 @@ resource "aws_glue_job" "raw_to_prepared" {
     
 module "dl_kms" {
   source = "terraform-aws-modules/kms/aws"
+  tag = var.tags
 }
 
   for_each = toset(var.dl_s3_prefixes)
