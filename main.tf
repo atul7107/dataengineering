@@ -35,7 +35,7 @@ module "s3_bucket" {
   depends_on = [module.dl_kms]
 }
 
-s3_bucket = {
+dl_s3_raw = {
   block_public_acls       = true
   block_public_policy     = true
   bucket_name             = "raw"
