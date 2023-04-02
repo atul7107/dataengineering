@@ -8,6 +8,7 @@ variable "dl_s3_raw" {
     lifecycle_rule         = any # or a more specific type
     restrict_public_buckets = bool
     versioning             = bool
+    create_s3_bucket       = bool # Add the create_s3_bucket attribute
     
   })
 }
