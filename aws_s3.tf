@@ -30,7 +30,7 @@ module "dl_s3_raw" {
   block_public_acls       = var.dl_s3_raw.block_public_acls
   block_public_policy     = var.dl_s3_raw.block_public_policy
   bucket                  = var.dl_s3_raw.bucket_name
-  create_s3_bucket        = var.dl_s3_raw.create_s3_bucket
+  count                   = var.dl_s3_raw.create_s3_bucket ? 1 : 0
   force_destroy           = var.dl_s3_raw.force_destroy
   kms_master_key_arn      = module.dl_kms.kms_arn
   lifecycle_rule          = var.dl_s3_raw.lifecycle_rule
