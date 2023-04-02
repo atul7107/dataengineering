@@ -6,27 +6,11 @@ dl_s3_raw = {
   force_destroy           = true
   restrict_public_buckets = true
   versioning              = { "status" = "Enabled" }
-  lifecycle_rule = [{
-    id      = "dl-s3-raw-transition"
-    enabled = true
-
-    transition = [
-      {
-        days          = 30
-        storage_class = "STANDARD_IA"
-      },
-      {
-        days          = 60
-        storage_class = "GLACIER"
-      }
-    ]
-
-    expiration = [
-      {
-        days = 180
-      }
-    ]
-  }]
+  lifecycle_rule = {
+  id      = "dl-s3-raw-transition"
+  enabled = true
+  transition = [    {      days          = 30      storage_class = "STANDARD_IA"    },    {      days          = 60      storage_class = "GLACIER"    }  ]
+  expiration = [    {      days = 180    }  ]
 }
 
 tags = {
