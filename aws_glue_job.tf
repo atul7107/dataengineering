@@ -88,10 +88,24 @@ module "dl_s3_internal" {
     {
       id      = "glacier_archive_rule"
       prefix  = "archive/"
+      status  = "Disabled"
       archive = {
         days            = "60"
         glacier_job_tier = "Standard"
       }
     },
   ]
+}
+
+ resource "aws_s3_bucket" "this" {
+  # ...
+  lifecycle_rule {
+    id      = each.value.id
+    prefix  = each.value.prefix
+    status  = each.value.status
+    transition {
+      days          = each.value.transition.days
+      storage_class = each.value.transition.storage_class
+    }
+  }
 }
