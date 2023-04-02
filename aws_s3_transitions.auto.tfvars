@@ -33,3 +33,7 @@ tags = {
   "Environment" = "dev"
   # Add any other tags you want to apply
 }
+
+dl_glue_job_raw_to_prepared = {
+}
+
