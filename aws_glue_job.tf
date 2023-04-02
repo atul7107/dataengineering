@@ -42,3 +42,40 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
   kms_key_id = module.dl_kms.kms_arn
 
 }
+    
+module "dl_s3_internal" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "2.13.0"
+  name   = "dl-s3-internal"
+  tags   = var.tags
+
+  acl = "private"
+
+  force_destroy = true
+
+  versioning_enabled = true
+
+  server_side_encryption_configuration = [
+    {
+      rule = {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "AES256"
+          kms_master_key_id = module.dl_kms.kms_arn
+        }
+      }
+    }
+  ]
+
+  lifecycle_rule = [
+    {
+      id      = "glacier_archive_rule"
+      prefix  = "archive/"
+      status  = "Enabled"
+      archive = {
+        days            = "60"
+        glacier_job_tier = "Standard"
+      }
+    },
+  ]
+}
+
