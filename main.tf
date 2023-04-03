@@ -2,9 +2,12 @@ module "dl_kms" {
   source = "terraform-aws-modules/kms/aws"
 }
 
+data "aws_s3_bucket" "this" {
+  bucket = "dataengineeringrawglabdev"
+}
 
-resource "aws_s3_bucket" "this" {
-  }
+#resource "aws_s3_bucket" "this" {
+ # }
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   for_each = { for rule in var.dl_s3_raw.lifecycle_rule : rule.id => rule }
