@@ -54,6 +54,8 @@ resource "aws_glue_catalog_database" "data" {
     
     
 resource "aws_iam_role" "dl_glue_crawler_role" {
+count = length(data.aws_iam_role.existing_role) > 0 ? 0 : 1
+  
   name = "dl_glue_crawler_role"
 
   assume_role_policy = jsonencode({
