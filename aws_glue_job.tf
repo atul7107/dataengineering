@@ -48,14 +48,13 @@ resource "aws_s3_bucket_acl" "this" {
     
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
        
-data "aws_glue_security_configuration" "existing_s3_encrypt_decrypt" {
-  name = "s3_encrypt_decrypt"
-}
-       
 resource "aws_glue_security_configuration" "s3_encrypt_decrypt" {
 count = length(data.aws_glue_security_configuration.existing_s3_encrypt_decrypt.*.name) > 0 ? 0 : 1
      
   name = "s3_encrypt_decrypt"
+     
+  lifecycle {
+  ignore_changes = all
 
   encryption_configuration {
     s3_encryption {
