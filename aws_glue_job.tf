@@ -44,6 +44,8 @@ resource "aws_kms_key" "cloudwatch_log" {
 resource "aws_s3_bucket_acl" "this" {
      
   bucket = var.dl_s3_internal_bucket_name
+  count  = var.create_bucket_acl ? 1 : 0
+  bucket = aws_s3_bucket.this.id
   acl    = var.acl
      
   lifecycle {
