@@ -45,7 +45,11 @@ resource "aws_s3_bucket_acl" "this" {
      
   bucket = var.dl_s3_internal_bucket_name
   acl    = var.acl
+     
+  lifecycle {
+    create_before_destroy = false
   }
+}    
     
 # Define the AWS Glue security configuration resource for S3 encryption and decryption
        
