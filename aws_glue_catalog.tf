@@ -1,7 +1,7 @@
-data "aws_glue_catalog_database" "db_data" {
-  for_each = toset(var.region_availability_zones)
+resource "aws_glue_catalog_database" "db_data" {
+  count = length(var.region_availability_zones)
 
-  name = "${var.dl_glue_raw_db}_${each.key}"
+  name = "${var.dl_glue_raw_db}_${element(var.region_availability_zones, count.index)}"
 }
 
 
