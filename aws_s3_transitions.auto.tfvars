@@ -5,6 +5,7 @@ dl_s3_raw = {
   create_s3_bucket        = true
   force_destroy           = true
   restrict_public_buckets = true
+  create_bucket_acl       = false
   versioning              = { "status" = "Enabled" }
   lifecycle_rule          = [
     {
