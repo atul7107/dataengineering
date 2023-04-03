@@ -52,29 +52,31 @@ resource "aws_glue_catalog_database" "data" {
   }
 }
  
-data "aws_iam_role" "existing_role" {
-  count = try(aws_iam_role.dl_glue_crawler_role.name, "") == "" ? 1 : 0
-  name  = "dl_glue_crawler_role"
-}
+terraform import aws_iam_role.dl_glue_crawler_role dl_glue_crawler_role  
+  
+#data "aws_iam_role" "existing_role" {
+ # count = try(aws_iam_role.dl_glue_crawler_role.name, "") == "" ? 1 : 0
+  #name  = "dl_glue_crawler_role"
+#}
 
       
-resource "aws_iam_role" "dl_glue_crawler_role" {
-count = length(data.aws_iam_role.existing_role) > 0 ? 0 : 1
+#resource "aws_iam_role" "dl_glue_crawler_role" {
+#count = length(data.aws_iam_role.existing_role) > 0 ? 0 : 1
   
-  name = "dl_glue_crawler_role"
+  #name = "dl_glue_crawler_role"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "glue.amazonaws.com"
-        }
-      }
-    ]
-  })
+  #assume_role_policy = jsonencode({
+   # Version = "2012-10-17"
+    #Statement = [
+     # {
+      #  Action = "sts:AssumeRole"
+       # Effect = "Allow"
+        #Principal = {
+         # Service = "glue.amazonaws.com"
+        #}
+      #}
+    #]
+  #})
 
-}
+#}
 
