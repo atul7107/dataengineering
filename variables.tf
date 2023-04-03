@@ -82,6 +82,12 @@ variable "acl" {
   default     = "private"
 }
 
+variable "dl_s3_internal_lifecycle_rule" {
+  description = "The lifecycle rules for the dl_s3_internal bucket"
+  type        = list(any)
+  default     = []
+}
+
 
 variable "server_side_encryption_configuration" {
   description = "The server-side encryption configuration for the S3 bucket"
