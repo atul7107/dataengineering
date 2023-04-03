@@ -77,16 +77,7 @@ module "dl_s3_internal" {
   acl = "private"
 
   force_destroy = true
-  server_side_encryption_configuration = var.server_side_encryption_configuration
-  server_side_encryption_configuration = [
-    {
-      rule = {
-        apply_server_side_encryption_by_default = {
-          sse_algorithm     = "AES256"
-        }
-      }
-    }
-  ]
+}
       
   lifecycle_rule = [
     {
