@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   for_each = { for rule in var.dl_s3_raw.lifecycle_rule : rule.id => rule }
-    bucket = data.aws_s3_bucket.this.id
+    bucket = aws_s3_bucket.this.id
   
   rule {
     id      = each.value.id
