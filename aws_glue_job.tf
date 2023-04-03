@@ -40,6 +40,16 @@ resource "aws_kms_key" "cloudwatch_log" {
   is_enabled  = true
 }
 
+provider "aws" {
+  alias  = "eu-west-1"
+  region = "eu-west-1"
+}
+
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
+}       
+       
 resource "aws_s3_bucket_acl" "this" {
      
   bucket = var.dl_s3_internal_bucket_name
