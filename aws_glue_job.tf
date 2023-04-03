@@ -78,7 +78,7 @@ module "dl_s3_internal" {
 
   force_destroy = true
   lifecycle_rule = var.dl_s3_internal_lifecycle_rule
-  lifecycle_rule = local.dl_s3_internal_lifecycle_rule
+  #lifecycle_rule = local.dl_s3_internal_lifecycle_rule
 }
       
 locals {
