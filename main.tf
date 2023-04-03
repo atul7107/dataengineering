@@ -2,9 +2,14 @@ module "dl_kms" {
   source = "terraform-aws-modules/kms/aws"
 }
 
-resource "aws_s3_bucket" "this" {
+data "aws_s3_bucket" "this" {
   bucket = "dataengineeringrawglabdev"
 }
+
+resource "aws_s3_bucket_lifecycle_configuration" "this" {
+  bucket = data.aws_s3_bucket.this.id
+}
+
 
 #resource "aws_s3_bucket" "this" {
  # }
