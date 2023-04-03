@@ -32,7 +32,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 }
 
 # Define the AWS IAM role resource for Glue jobs
+  
+data "aws_iam_role" "existing_glue_jobs_role" {
+  name = "glue-jobs-role"
+}
+  
 resource "aws_iam_role" "glue_jobs" {
+ count = length(data.aws_iam_role.existing_glue_jobs_role.*.arn) > 0 ? 0 : 1
   name = "glue-jobs-role"
 
   assume_role_policy = jsonencode({
