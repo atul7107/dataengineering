@@ -55,6 +55,7 @@ count = length(data.aws_glue_security_configuration.existing_s3_encrypt_decrypt.
      
   lifecycle {
   ignore_changes = all
+  }
 
   encryption_configuration {
     s3_encryption {
