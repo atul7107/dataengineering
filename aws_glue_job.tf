@@ -3,7 +3,8 @@ resource "aws_glue_job" "raw_to_prepared" {
   for_each = toset(var.dl_s3_prefixes)
   
   name                   = "${var.dl_glue_job_raw_to_prepared.name}_${each.key}"
-  role_arn               = aws_iam_role.glue_jobs.arn
+  #role_arn               = aws_iam_role.glue_jobs.arn
+  role_arn = length(data.aws_iam_role.existing_glue_jobs_role.*.arn) > 0 ? data.aws_iam_role.existing_glue_jobs_role.arn : aws_iam_role.glue_jobs[0].arn   
   security_configuration = aws_glue_security_configuration.s3_encrypt_decrypt.name
   glue_version           = var.dl_glue_job_raw_to_prepared.glue_version
   number_of_workers      = var.dl_glue_job_raw_to_prepared.number_of_workers
