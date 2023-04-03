@@ -77,9 +77,12 @@ module "dl_s3_internal" {
   acl = "private"
 
   force_destroy = true
+  lifecycle_rule = var.dl_s3_internal_lifecycle_rule
+  lifecycle_rule = local.dl_s3_internal_lifecycle_rule
 }
       
-  lifecycle_rule = [
+locals {
+  dl_s3_internal_lifecycle_rule = [
     {
       id      = "glacier_archive_rule"
       prefix  = "archive/"
