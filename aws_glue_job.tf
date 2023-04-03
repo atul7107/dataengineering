@@ -38,17 +38,7 @@ resource "aws_s3_bucket_object" "scripts_raw_to_prepared" {
 resource "aws_kms_key" "cloudwatch_log" {
   description = "KMS key for CloudWatch log encryption"
   is_enabled  = true
-}
-
-provider "aws" {
-  alias  = "eu-west-1"
-  region = "eu-west-1"
-}
-
-provider "aws" {
-  alias  = "us-east-1"
-  region = "us-east-1"
-}       
+} 
        
 resource "aws_s3_bucket_acl" "this" {
      
