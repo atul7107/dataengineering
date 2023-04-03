@@ -51,8 +51,13 @@ resource "aws_glue_catalog_database" "data" {
     ]
   }
 }
-    
-    
+ 
+data "aws_iam_role" "existing_role" {
+  count = try(aws_iam_role.dl_glue_crawler_role.name, "") == "" ? 1 : 0
+  name  = "dl_glue_crawler_role"
+}
+
+      
 resource "aws_iam_role" "dl_glue_crawler_role" {
 count = length(data.aws_iam_role.existing_role) > 0 ? 0 : 1
   
