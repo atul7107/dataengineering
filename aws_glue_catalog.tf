@@ -1,8 +1,16 @@
-resource "aws_glue_catalog_database" "db_data" {
+data "aws_glue_catalog_database" "db_data" {
+  for_each = toset(var.region_availability_zones)
 
-  for_each = toset(var.dl_zones)
-
-  name        = "${var.dl_catalog_db.name}_${each.key}"
-  description = "${var.dl_catalog_db.description} ${upper(each.key)} zone"
-
+  name = "${var.dl_glue_raw_db}_${each.key}"
 }
+
+
+
+#resource "aws_glue_catalog_database" "db_data" {
+
+  #for_each = toset(var.dl_zones)
+
+  #name        = "${var.dl_catalog_db.name}_${each.key}"
+  #description = "${var.dl_catalog_db.description} ${upper(each.key)} zone"
+
+#}
