@@ -35,4 +35,6 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.TF_USER_AWS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_USER_AWS_SECRET }}
         
-      run: terraform apply -auto-approve -input=false
+      run: | 
+        terraform import aws_glue_security_configuration.s3_encrypt_decrypt s3_encrypt_decrypt
+        terraform apply -auto-approve -input=false
