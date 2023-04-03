@@ -32,7 +32,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
       }
     }
   }
-  bucket = aws_s3_bucket.this.id
 }
 
 # Define the AWS IAM role resource for Glue jobs
