@@ -1,5 +1,4 @@
 resource "aws_glue_crawler" "crawler" {
-
   for_each = {
     for v in local.zone_prefix_map : "${v.zone}:${v.s3_prefix}" => v
   }
@@ -7,7 +6,6 @@ resource "aws_glue_crawler" "crawler" {
   database_name = aws_glue_catalog_database.data["${each.value.zone}"].name
   name          = "crawler_${each.value.zone}_${each.value.s3_prefix}"
   table_prefix  = "${each.value.s3_prefix}_"
-  #role          = aws_iam_role.dl_glue_crawler_role[count.index].arn
   role          = length(data.aws_iam_role.existing_role.*.arn) > 0 ? data.aws_iam_role.existing_role.arn : aws_iam_role.dl_glue_crawler_role[0].arn
   tags          = var.tags
 
@@ -42,53 +40,25 @@ resource "aws_glue_catalog_database" "data" {
   }
 }
 
-#data "aws_iam_role" "existing_role" {
- # name  = "dl_glue_crawler_role"
-#}
+data "aws_iam_role" "existing_role" {
+  name  = "dl_glue_crawler_role"
+}
 
-#resource "aws_iam_role" "dl_glue_crawler_role" {
- # count = length(data.aws_iam_role.existing_role.*.arn) > 0 ? 0 : 1
+resource "aws_iam_role" "dl_glue_crawler_role" {
+  count = length(data.aws_iam_role.existing_role.*.arn) > 0 ? 0 : 1
 
-  #name = "dl_glue_crawler_role"
+  name = "dl_glue_crawler_role"
 
-  #assume_role_policy = jsonencode({
-   # Version = "2012-10-17"
-    #Statement = [
-     # {
-      #  Action = "sts:AssumeRole"
-       # Effect = "Allow"
-        #Principal = {
-         # Service = "glue.amazonaws.com"
-        #}
-      #}
-    #]
-  #})
-#}
-  
-#terraform import aws_iam_role.dl_glue_crawler_role dl_glue_crawler_role  
-  
-#data "aws_iam_role" "existing_role" {
- # count = try(aws_iam_role.dl_glue_crawler_role.name, "") == "" ? 1 : 0
-  #name  = "dl_glue_crawler_role"
-#}
-
-      
-#resource "aws_iam_role" "dl_glue_crawler_role" {
-#count = length(data.aws_iam_role.existing_role) > 0 ? 0 : 1
-  
-  #name = "dl_glue_crawler_role"
-
-  #assume_role_policy = jsonencode({
-   # Version = "2012-10-17"
-    #Statement = [
-     # {
-      #  Action = "sts:AssumeRole"
-       # Effect = "Allow"
-        #Principal = {
-         # Service = "glue.amazonaws.com"
-        #}
-      #}
-    #]
-  #})
-
-#}
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "glue.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
