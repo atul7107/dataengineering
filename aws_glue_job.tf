@@ -41,6 +41,8 @@ resource "aws_kms_key" "cloudwatch_log" {
 }
 
 resource "aws_s3_bucket_acl" "this" {
+  provider = aws.eu-west-1   
+     
   bucket = var.dl_s3_internal_bucket_name
   acl    = var.acl
   }
