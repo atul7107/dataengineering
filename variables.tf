@@ -88,6 +88,13 @@ variable "dl_s3_internal_lifecycle_rule" {
   default     = []
 }
 
+variable "dl_glue_raw_db" {
+  description = "The name of the Glue raw database"
+  type        = string
+  default     = "dl_glue_raw_db" # Replace this with a default database name or remove the line if you want to make it required
+}
+
+
 variable "region_availability_zones" {
   description = "List of availability zones in the region"
   type        = list(string)
