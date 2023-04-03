@@ -30,17 +30,28 @@ resource "aws_glue_crawler" "crawler" {
   EOF
 }
 
-  resource "aws_glue_catalog_database" "data" {
-  for_each = {
-    for zone in var.dl_zones : zone => {
-      name = "${var.dl_catalog_db.name}_${zone}"
-      description = "${var.dl_catalog_db.description} ${upper(zone)} zone"
-    }
-  }
+  #resource "aws_glue_catalog_database" "data" {
+  #for_each = {
+   # for zone in var.dl_zones : zone => {
+    #  name = "${var.dl_catalog_db.name}_${zone}"
+     # description = "${var.dl_catalog_db.description} ${upper(zone)} zone"
+    #}
+  #}
 
-  name        = each.value.name
-  description = each.value.description
+  #name        = each.value.name
+  #description = each.value.description
+#}
+resource "aws_glue_catalog_database" "data" {
+  for_each = toset(var.region_availability_zones)
+  name = "${var.dl_glue_raw_db}_${each.key}"
+
+  lifecycle {
+    ignore_changes = [
+      name,
+    ]
+  }
 }
+    
     
 resource "aws_iam_role" "dl_glue_crawler_role" {
   name = "dl_glue_crawler_role"
