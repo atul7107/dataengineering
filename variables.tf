@@ -101,6 +101,11 @@ variable "region_availability_zones" {
   default     = [] # You can provide default availability zones or leave it empty
 }
 
+variable "create_bucket_acl" {
+  default = true
+}
+
+
 variable "server_side_encryption_configuration" {
   description = "The server-side encryption configuration for the S3 bucket"
   type        = map(any)
